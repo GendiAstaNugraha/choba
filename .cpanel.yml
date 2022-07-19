@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/u1583735/public_html/
-    - /bin/cp -r choba $DEPLOYPATH
