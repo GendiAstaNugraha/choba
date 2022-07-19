@@ -24,11 +24,13 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+        <span class="mask bg-dark opacity-6"></span>
+    </div>
     @include('admin.sidebar')
     <main class="main-content position-relative border-radius-lg ">
         @include('admin.navbar')
-        @include('admin.main')
+        @yield('content')
     </main>
     @include('admin.setting')
 

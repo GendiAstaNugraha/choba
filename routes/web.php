@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Account\Admin\DashboardController;
+use App\Http\Controllers\Account\Admin\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin', [HomeController::class, 'index'])->name('admin');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin');
+    Route::get('/admin/profile', [ProfileController::class, 'index'])->name('profile');
 });
 Route::group(['middleware' => ['role:seller']], function () {
     Route::get('/seller', function(){
@@ -31,6 +34,6 @@ Route::group(['middleware' => ['role:seller']], function () {
 });
 Route::group(['middleware' => ['role:customer']], function () {
     Route::get('/customer', function(){
-        return view('customer');
+        return view('layouts.customer');
     })->name('customer');
 });

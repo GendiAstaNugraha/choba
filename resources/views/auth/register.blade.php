@@ -27,6 +27,7 @@
         </div>
     </main>
     @include('auth.register.footer')
+
 </body>
 
 </html>
