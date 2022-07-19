@@ -1,7 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/u1583735/domains/choba
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp style.css $DEPLOYPATH
+    - export DEPLOYPATH=/home/u1583735/public_html/
     - /bin/cp -r choba $DEPLOYPATH
