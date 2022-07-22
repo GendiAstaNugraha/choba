@@ -1,12 +1,11 @@
-{{-- carousel --}}
-@include('app.carousel')
+@extends('layouts.customer')
 
-<!-- Marketing messaging and featurettes
-  ================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
+@section('content')
+
+{{-- carousel --}}
+@include('customer.carousel')
 
 <div class="container marketing">
-
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-4">
@@ -43,9 +42,7 @@
 
 
     <!-- START THE FEATURETTES -->
-
     <hr class="featurette-divider">
-
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
@@ -59,8 +56,6 @@
 
         </div>
     </div>
-
-    <hr class="featurette-divider">
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
@@ -97,3 +92,5 @@
     <!-- /END THE FEATURETTES -->
 
 </div><!-- /.container -->
+
+@endsection
