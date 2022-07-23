@@ -6,9 +6,11 @@ use App\Http\Controllers\Account\Admin\ProfileController;
 use App\Http\Controllers\Account\Customer\CartController;
 use App\Http\Controllers\Account\Customer\DataCustomerController;
 use App\Http\Controllers\Account\Customer\HomeController;
+use App\Http\Controllers\Account\Customer\OngkirController;
 use App\Http\Controllers\Account\seller\DataSellerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +56,6 @@ Route::group(['middleware' => ['auth','role:seller']], function () {
 Route::group(['middleware' => ['auth','role:customer']], function () {
     Route::get('/customer', [HomeController::class, 'index'])->name('customer');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.customer');
+    Route::post('/cart/ongkir', [CartController::class, 'getOngkir']);
+    Route::get('/province/{id}/cities', [CartController::class, 'getCities']);
 });

@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                            <h5>Shopping Cart</h5>
+                        <h5>Shopping Cart</h5>
                     </div>
 
                     @if (session()->has('status'))
@@ -75,9 +75,52 @@
                         </div>
                     </div>
 
-<div class="carr-body my-5">
-<button>dfg</button>
-</div>
+                    <div class="card-body row my-5">
+                        <form action="/cart/ongkir" role="form" method="POST">
+                            @csrf
+
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3>SENT TO</h3>
+                                        <hr>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">PROVINSI</label>
+                                            <select class="form-control province" name="province">
+                                                <option value="0">-- pilih provinsi tujuan --</option>
+                                                @foreach ($provinces as $province => $value)
+                                                <option value="{{ $province  }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">KOTA / KABUPATEN</label>
+                                            <select class="form-control city" name="city">
+                                                <option value="">-- pilih kota tujuan --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3>KURIR</h3>
+                                        <hr>
+                                        <div class="form-group">
+                                            <select class="form-control kurir" name="courier">
+                                                <option value="0">-- pilih kurir --</option>
+                                                @foreach ($couriers as $courier => $value)
+                                                <option value="{{ $courier }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-md btn-primary" data-toggle="modal" data-target="#ongkir">PRICE COURIER</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                     <div class="card-footer text-end row">
                         <h5 href="" class="col me-5 mt-2">Total : Rp 1000</h5>
@@ -87,5 +130,30 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select[name="province"]').on('change', function() {
+                let provinceId = $(this).val();
+                if (provinceId) {
+                    jQuery.ajax({
+                        url: '/province/' + provinceId + '/cities'
+                        , type: "GET"
+                        , dataType: "json"
+                        , success: function(data) {
+                            $('select[name="city"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="city"]').append('<option value="' + key + '">' + value + '</option>')
+                            })
+                        }
+                    })
+                } else {
+                    $('select[name="city"]').empty();
+                }
+            })
+        })
+    </script>
 </main>
 @endsection
